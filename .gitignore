@@ -1,0 +1,20 @@
+# form-elements
+
+
+# dependencies
+form-elements/node_modules
+form-elements/.pnp
+.pnp.js
+
+# testing
+form-elements/coverage
+
+# production
+form-elements/build
+
+# misc
+form-elements/.DS_Store
+form-elements/.env.local
+form-elements/.env.development.local
+form-elements/.env.test.local
+form-elements/.env.production.local
