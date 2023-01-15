@@ -18,3 +18,24 @@ form-elements/.env.local
 form-elements/.env.development.local
 form-elements/.env.test.local
 form-elements/.env.production.local
+
+# lazy-loading
+
+
+# dependencies
+lazy-loading/node_modules
+lazy-loading/.pnp
+.pnp.js
+
+# testing
+lazy-loading/coverage
+
+# production
+lazy-loading/build
+
+# misc
+lazy-loading/.DS_Store
+lazy-loading/.env.local
+lazy-loading/.env.development.local
+lazy-loading/.env.test.local
+lazy-loading/.env.production.local
