@@ -39,3 +39,23 @@ lazy-loading/.env.local
 lazy-loading/.env.development.local
 lazy-loading/.env.test.local
 lazy-loading/.env.production.local
+
+#infinite-scroll
+# dependencies
+infinite-scroll/node_modules
+infinite-scroll/.pnp
+.pnp.js
+
+# testing
+infinite-scroll/coverage
+
+# production
+infinite-scroll/build
+
+# misc
+infinite-scroll/.DS_Store
+infinite-scroll/.env.local
+infinite-scroll/.env.development.local
+infinite-scroll/.env.test.local
+infinite-scroll/.env.production.local
+

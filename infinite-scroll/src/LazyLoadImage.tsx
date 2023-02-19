@@ -1,20 +1,35 @@
-// import "./LazyLoadedImage.css";
-
 import React, { useEffect, useRef } from "react";
 
 interface LLImagePropsI {
-  imageSrc: string;
-  altText: string;
+  author: string;
+  url: string;
+  isLastImageTile?: boolean;
+  nextPage: () => void;
+  idx: number;
+  downloadUrl: string;
+  id: string;
 }
 
-const intersectionObserverConfig = {
-  rootMargin: "0px 0px 300px 0px", // 300px before bottom
-  threshold: 0.2,
-};
-const LazyLoadedImage = ({ altText, imageSrc }: LLImagePropsI) => {
+const LazyLoadImage = ({
+  author,
+  downloadUrl,
+  url,
+  isLastImageTile,
+  nextPage,
+  idx,
+  id,
+}: LLImagePropsI) => {
   const imageRef = useRef<HTMLImageElement>(null);
 
+  const intersectionObserverConfig = {
+    rootMargin: "0px 0px 300px 0px", // 300px before bottom
+    threshold: 0.2,
+  };
   useEffect(() => {
+    if (isLastImageTile) {
+      intersectionObserverConfig.rootMargin = "0px 0px 0px 0px";
+      intersectionObserverConfig.threshold = 0;
+    }
     // create intersection observer
     const observer: IntersectionObserver = new IntersectionObserver(
       (
@@ -28,13 +43,17 @@ const LazyLoadedImage = ({ altText, imageSrc }: LLImagePropsI) => {
               //load the image
               theImage.src = theImage.dataset.src;
             }
+
+            if (isLastImageTile) {
+              nextPage();
+            }
           }
         });
       },
       intersectionObserverConfig
     );
     // stop observation , if observed once and image is loaded
-    if (imageRef.current?.src === imageSrc) {
+    if (imageRef.current?.src === url) {
       observer.unobserve(imageRef.current);
     }
     //start the observation
@@ -45,21 +64,24 @@ const LazyLoadedImage = ({ altText, imageSrc }: LLImagePropsI) => {
       // stop observer if component is unmounted
       observer.disconnect();
     };
-  }, [imageSrc]);
-
+  }, [isLastImageTile]);
   return (
-    <div className="image-container">
-      <img
-        src=""
-        alt={altText}
-        width={1000}
-        height={500}
-        ref={imageRef}
-        data-src={imageSrc}
-        className="img"
-      />
-    </div>
+    <>
+      <div>
+        <img
+          src=""
+          alt={author}
+          data-src={url}
+          ref={imageRef}
+          width={1000}
+          height={500}
+        />
+      </div>
+      <div>
+        <p>{author}</p>
+      </div>
+    </>
   );
 };
 
-export default LazyLoadedImage;
+export default LazyLoadImage;
